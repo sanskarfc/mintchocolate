@@ -1,0 +1,48 @@
+name: Site checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check site configuration and JavaScript
+        run: |
+          node <<'JS'
+          const assert = require('node:assert/strict');
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const { Script } = require('node:vm');
+          const config = JSON.parse(fs.readFileSync('vercel.json', 'utf8'));
+          const output = config.outputDirectory;
+          assert.equal(typeof output, 'string', 'Vercel must have an output directory');
+          const html = fs.readFileSync(path.join(output, 'index.html'), 'utf8');
+          assert.match(html, /<!doctype html>/i, 'The homepage needs an HTML doctype');
+          assert.match(html, /<title>[^<]+<\/title>/i, 'The homepage needs a title');
+          let scripts = 0;
+          for (const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
+            const attributes = match[1];
+            if (/\bsrc\s*=/i.test(attributes)) continue;
+            if (/\btype\s*=/i.test(attributes) && !/\btype\s*=\s*["'](?:text|application)\/javascript["']/i.test(attributes)) continue;
+            new Script(match[2], { filename: `index.html:inline-script-${++scripts}` });
+          }
+          console.log(`Site configuration and ${scripts} inline script(s) passed.`);
+          JS
+      - name: Check whitespace
+        run: git diff-tree --check HEAD
