@@ -1,0 +1,19 @@
+.github/workflows/ci.yml
+  s_d1975f946033f1::t_71c22ee7f40cb5 1-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "2a405f7435114f43e945f57236adb9a730dd86cb",
+  "prompts": {},
+  "sessions": {
+    "s_d1975f946033f1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0d956-c250-72a2-87f9-e5492218802d",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "sanskar <sanskarfc@gmail.com>"
+    }
+  }
+}
