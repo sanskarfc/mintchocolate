@@ -1,0 +1,20 @@
+public/index.html
+  s_d1975f946033f1::t_3dc7b3a687b589 10-174
+  s_d1975f946033f1::t_c85b7e59ec52c5 1-9,175
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "b3ac8b2837a768eefd3c03e3343cb07ae5a3b1c8",
+  "prompts": {},
+  "sessions": {
+    "s_d1975f946033f1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0d956-c250-72a2-87f9-e5492218802d",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "sanskar <sanskarfc@gmail.com>"
+    }
+  }
+}
