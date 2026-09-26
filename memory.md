@@ -13,6 +13,8 @@
   - `public/choc1.png` — `.choc` (same full-viewport cover alignment)
 - Scroll section (100svh, `z-index: 1`): `public/scrollbg.png` cover background,
   slides over the pinned layers while scrolling
+  - `public/choc1.png`–`choc4.png` — `#choc.choc`, absolute cover in section, click-cycles 1→2→3→4→1
+  - `public/allchoc.png` — `.allchoc`, absolute cover in section, pointer-events none
 - Unused (untracked, not referenced): `public/choc2.png`–`choc5.png`, `public/Bgmintchoc.png`
 - Roaming SVG cats + `<h1>hi medha</h1>` removed; `<title>` kept for CI
 
